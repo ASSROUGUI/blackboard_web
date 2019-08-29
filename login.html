@@ -1,0 +1,87 @@
+
+<?php
+//include config
+
+
+ ob_start();
+ session_start();
+ require_once 'server.php';
+ 
+ // it will never let you open index(login) page if session is set
+ if ( isset($_SESSION['username'])!="" ) {
+  header("Location: ProjectsResearcher.php");
+  exit;
+ }
+ 
+ $error = false;
+ 
+ if( isset($_POST['log_user']) ) { 
+  
+  // prevent sql injections/ clear user invalid inputs
+  $email = trim($_POST['username']);
+  $email = strip_tags($email);
+  $email = htmlspecialchars($email);
+  
+  $pass = trim($_POST['pass']);
+  $pass = strip_tags($pass);
+  $pass = htmlspecialchars($pass);
+  // prevent sql injections / clear user invalid inputs
+  
+
+  
+  // if there's no error, continue to login
+  if (!$error) {
+   
+   $password = hash('sha256', $pass); // password hashing using SHA256
+  
+   $res=mysql_query("SELECT username, password users WHERE 
+   	userEmail='$email'");
+   $row=mysql_fetch_array($res);
+   $count = mysql_num_rows($res); // if uname/pass correct it returns must be 1 row
+   
+   if( $count == 1 && $row['userPass']==$password ) {
+    $_SESSION['user'] = $row['userId'];
+    header("Location: ProjectsResearcher.php");
+   } else {
+    $errMSG = "Incorrect Credentials, Try again...";
+   }
+    
+  }
+  
+ }
+ ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Log in</title>
+	<br/>
+	<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="stayleLogin.css">
+	<link rel="stylesheet" type="text/css" href="csLogin.css">
+	<form action="http://localhost/login.php">
+	 		<!-- Links -->
+	</head>
+	<body>
+	<h4 class="heading"><strong> CRAMS </strong> Collaborative Research Articles Management System <span></span> </h4>
+	<div class="login-page">
+		<form method="post" action="HomeResearcher.php">
+
+		<?php include('errors.php'); ?>
+
+	  <div class="form">
+	      <form class="login-form">
+	      <img src="login.png" class="resize"> <br/>
+	      <input type="text" name="username" placeholder="username"/>
+	      <input type="password" name="pass" placeholder="password"/>
+	    <button type="submit" class="btn" name="log_user">login</button>
+	    	
+	      <p class="message">Not registered? <a href="register.php">Create an account</a></p>
+	  </div>
+	</div>
+<footer>&copy; Copyright 2017 Group 08 </footer>
+</form>
+	</body>
+	</html>
+
+	
