@@ -1,0 +1,66 @@
+
+
+
+<html>
+<head>
+	<title>Projects</title>
+	<link rel="stylesheet" type="text/css" href="layout.css">
+</head>
+<body>
+<header>
+	<div id="header">
+	<img src="logo1.jpg" alt="Al-imam logo" width="120" height="120" id="logo">
+	<p id="headerPar">Kingdom of Saudi Arabia<br>Ministry of Education<br>Al-Imam Muhammed Ibn Saud Islamic University</p>
+	<h1 id="title">Collaborative Research Articles Management System </h1>
+	</div>
+</header>
+<div id="nav">
+		<ul>
+			<li><a href="HomeResearcher.html">Home</a></li>
+			<li><a href="ProjectsResearcher.html">Projects</a></li>
+			<li><a href="list_files.html">Downloads</a></li>
+			<li><a href="about.html">About us</a></li>
+			<li><a href="logout.php">Logout</a></li>
+		</ul>
+	</div>
+<div id="participate">
+	<h2>Projects you are participate with:</h2>
+	<table id="projTable">
+		<tr>
+			<th>Project</th>
+			<th>Research Name</th>
+			<th>Domain</th>
+			<th>Researchers Participate in the project</th>
+		</tr>
+	</table>
+</div>
+<div id="upload">
+<h2>Add a new project proposal</h2>
+ <form action="add_file.php" method="post" enctype="multipart/form-data">
+	<!--<label>Research Title:<input type="text" name="title" id="protitle" required></label>
+	<label>Research Domain:<input type="text" name="domain" id="prodomain" required></label>
+		<p><label>Researcher Name:<input type="text" name="prodomain" id="prodomain" required></label></p>-->
+	<p><label>Upload your proposal in PDF format:<input type="file" name="uploaded_file" id ="fupload" accept=".pdf" required></label></p>
+	<p><input type="Submit" name="btn_upload" id="prosub" value="Submit" required></p>
+</form>
+	 <p> <a href="list_files.html">See all files</a> </p>
+</div>
+
+</div>
+
+<div id="review">
+	<h2>Projects needs your review:</h2>
+	<table id="projTable2">
+		<tr>
+			<th>Project</th>
+			<th>Domain</th>
+			<th>Research Name</th>
+			<th>Researchers Participate in the project</th>
+		</tr>
+	</table>
+</div>
+<footer>
+		<p>&copy;CRAMS</p>
+</footer>
+</body>
+</html>
